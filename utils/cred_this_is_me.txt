@@ -1,0 +1,18 @@
+{
+    "access_token": null,
+    "client_id": "32555940559.apps.googleusercontent.com",
+    "client_secret": "ZmssLNjJy2998hD4CTg2ejr2",
+    "refresh_token": "1/KULMujYBV5yE06S6z3Yus66fJbF9kB870n0IBUKFCJA",
+    "token_expiry": null,
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "user_agent": "Python client library",
+    "revoke_uri": "https://oauth2.googleapis.com/revoke",
+    "id_token": null,
+    "id_token_jwt": null,
+    "token_response": null,
+    "scopes": [],
+    "token_info_uri": null,
+    "invalid": false,
+    "_class": "GoogleCredentials",
+    "_module": "oauth2client.client"
+}

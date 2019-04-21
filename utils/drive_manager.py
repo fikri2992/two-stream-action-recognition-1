@@ -46,7 +46,7 @@ from utils.zip_manager import ZipFile
 class DriveManager:
     # check projects directories
     def __init__(self, project_name,
-                 personal_dfolder="1sjKuoFGYqURSiCOM-gUQ4iuyx4M0pJxd",  # your folder the code can read and write to it using your own credentials
+                 personal_dfolder="1XsSo6zR8bRlDfy7n40NirKNNBdxVh5nE",  # your folder the code can read and write to it using your own credentials
                  base_download_dfolder="1B82anWV8Mb4iHYmOp9tIR9aOTlfllwsD",  # my folder..the code have read access to it(public)..don't change this <<<
                  cred_dir='./utils'
                  ):
