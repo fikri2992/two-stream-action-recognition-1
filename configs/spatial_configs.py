@@ -73,9 +73,9 @@ pretrained = True
 testing_samples_per_video = 19
 lr = 10e-6
 model_name = "xception"  # resnet xception vgg mobilenet
-epochs = 175
+epochs = 10
 validate_every = 5
-augmenter_level = 0  # 0 heavy , 1 medium,2 simple
+augmenter_level = 2  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,sgd,pretrained,5e-6,xception"""
 # is_adam = False

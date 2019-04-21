@@ -116,13 +116,13 @@ def get_batch_size(model_restored, spatial):
     """
     if spatial:
         if model_restored.layers[2].__dict__["_name"] == 'resnet50':
-            batch_size = 76 if is_tesla_k80 else 48
+            batch_size = 20 if is_tesla_k80 else 20
         elif model_restored.layers[2].__dict__["_name"] == 'xception':
-            batch_size = 24 if is_tesla_k80 else 24
+            batch_size = 20 if is_tesla_k80 else 20
         elif model_restored.layers[2].__dict__["_name"] == 'vgg19':
-            batch_size = 36 if is_tesla_k80 else 36
+            batch_size = 20 if is_tesla_k80 else 20
         else:
-            batch_size = 100 if is_tesla_k80 else 100
+            batch_size = 20 if is_tesla_k80 else 20
     else:
         if model_restored.layers[2].__dict__["_name"] == 'resnet50':
             batch_size = 20 if is_tesla_k80 else 20
