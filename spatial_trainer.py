@@ -39,7 +39,7 @@ pred_file = "spatial.preds"
 ################################################################################
 """Checking latest"""
 print(experiment_identifier)
-num_actions = 101
+num_actions = 2
 print("Number of workers:", workers, file=log_stream)
 drive_manager = DriveManager(experiment_identifier)
 checkpoint_found, zip_file_name = drive_manager.get_latest_snapshot()

@@ -263,8 +263,8 @@ class XceptionMotionCNN:
 
 if __name__ == '__main__':
     # test :D
-    model1 = ResNet50MotionCNN(num_classes=101, stacked_frames=10, is_tesla_k80=True)
-    model2 = ResNet50MotionCNN2(num_classes=101, stacked_frames=10, is_tesla_k80=True)
+    model1 = ResNet50MotionCNN(num_classes=2, stacked_frames=10, is_tesla_k80=True)
+    model2 = ResNet50MotionCNN2(num_classes=2, stacked_frames=10, is_tesla_k80=True)
     model3 = ResNet50()
     print(model1.layers)
     print(model2.layers)
@@ -279,7 +279,7 @@ if __name__ == '__main__':
 
     print("xception test")
     model4 = Xception(input_shape=(299, 299, 3))
-    model5 = XceptionMotionCNN(num_classes=101, is_tesla_k80=True, stacked_frames=10)
+    model5 = XceptionMotionCNN(num_classes=2, is_tesla_k80=True, stacked_frames=10)
 
     print(model4.layers)
     print(model5.layers)
