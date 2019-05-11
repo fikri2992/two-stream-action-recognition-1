@@ -91,7 +91,6 @@ else:
 
     # noinspection PyUnboundLocalVariable
     keras_spatial_model = model.get_keras_model()
-    tensorboard = TensorBoard(log_dir="./logs/{}".format(time()))
     # init data loader
     train_loader, test_loader, test_video_level_label = data_loader(**model.get_loader_configs()).run()  # batch_size, width , height)
 
