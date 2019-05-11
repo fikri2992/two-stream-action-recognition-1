@@ -13,8 +13,8 @@ from utils.drive_manager import DriveManager
 Evaluate spatial stream
 """
 # download
-drive_manager = DriveManager("spa-xception-adam-5e-06-imnet")
-drive_manager.download_file('1djGzpxAYFvNX-UaQ7ONqDHGgnzc8clBK', "spatial.zip")
+# drive_manager = DriveManager("spa-xception-adam-5e-06-imnet")
+# drive_manager.download_file('1djGzpxAYFvNX-UaQ7ONqDHGgnzc8clBK', "spatial.zip")
 
 # load into ram
 print("Spatial stream")
@@ -36,8 +36,8 @@ print("Spatial Model validation", "prec@1", video_level_accuracy_1, "prec@5", vi
 Evaluate motion stream
 """
 # download
-drive_manager = DriveManager("heavy-mot-xception-adam-1e-05-imnet")
-drive_manager.download_file('1kvslNL8zmZYaHRmhgAM6-l_pNDDA0EKZ', "motion.zip")  # the id of the zip file contains my network
+# drive_manager = DriveManager("heavy-mot-xception-adam-1e-05-imnet")
+# drive_manager.download_file('1kvslNL8zmZYaHRmhgAM6-l_pNDDA0EKZ', "motion.zip")  # the id of the zip file contains my network
 
 # load into ram
 print("Motion stream")

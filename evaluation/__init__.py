@@ -15,7 +15,7 @@ from tensorflow.python.keras.engine.saving import model_from_config, load_weight
 is_tesla_k80 = os.path.isdir("/content")
 
 
-# from tensorflow.keras.models import load_model # 1.11.1.rc2
+# from tensorflow.keras.models import load_model # 1.11.1.rc21.11.1.rc2
 # load model in the new version of tensorflow doesnt work for me and i can't re install older tensorflow-gpu with older cuda for every colab machine :DDD
 def legacy_load_model(filepath, custom_objects=None, compile=True):  # pylint: disable=redefined-builtin
     """
