@@ -41,7 +41,6 @@ pred_file = "motion.preds"
 """Checking latest"""
 print(experiment_identifier)
 num_actions = 10
-print("Number of workers:", workers, file=log_stream)
 drive_manager = DriveManager(experiment_identifier)
 checkpoint_found, zip_file_name = drive_manager.get_latest_snapshot()
 ################################################################################
@@ -55,7 +54,7 @@ MotionValidationCallback = partial(eval_globals.get_validation_callback,
 data_loader = partial(frame_dataloader.MotionDataLoader,
                       testing_samples_per_video=testing_samples_per_video,
                       augmenter_level=augmenter_level,
-                      log_stream=log_stream, stacked_frames=stacked_frames)
+                      stacked_frames=stacked_frames)
 
 if checkpoint_found:
     # restore the model from the checkpoint
@@ -69,14 +68,14 @@ if checkpoint_found:
                                                                     height=int(motion_model_restored.inputs[0].shape[2]),
                                                                     batch_size=get_batch_size(motion_model_restored,
                                                                                               spatial=False)).run()
-    tensorboard = TensorBoard(log_dir="./logs/{}".format(time()))
+    
     # training
     motion_model_restored.fit_generator(train_loader,
                                         steps_per_epoch=len(train_loader),  # generates a batch per step
                                         epochs=epochs,
                                         use_multiprocessing=True, workers=workers,
                                         # validation_data=gen_test(), validation_steps=len(test_loader.dataset)
-                                        callbacks=[tensorboard , MotionValidationCallback(model=motion_model_restored, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
+                                        callbacks=[ MotionValidationCallback(model=motion_model_restored, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
                                                    keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience=validate_every, verbose=1)],
                                         initial_epoch=int(zip_file_name.split("-")[0]))  # get epoch number
 
@@ -105,16 +104,14 @@ else:
                                loss=sparse_categorical_cross_entropy_loss,
                                metrics=[acc_top_1, acc_top_5])
 
-    keras_motion_model.summary(print_fn=lambda *args: print(args, file=log_stream))
     keras_motion_model.summary()
     log_stream.flush()
-    tensorboard = TensorBoard(log_dir="./logs/{}".format(time()))
     # training
     keras_motion_model.fit_generator(train_loader,
                                      steps_per_epoch=len(train_loader),  # generates a batch per step
                                      epochs=epochs,
                                      use_multiprocessing=True, workers=workers,
                                      # validation_data=gen_test(), validation_steps=len(test_loader.dataset)
-                                     callbacks=[tensorboard , MotionValidationCallback(model=keras_motion_model, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
+                                     callbacks=[MotionValidationCallback(model=keras_motion_model, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
                                                 keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience=validate_every * 10, verbose=1)],
                                      )
