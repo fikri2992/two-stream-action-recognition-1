@@ -53,7 +53,7 @@ class SpatialSequence(keras.utils.Sequence):
                 frame_id = batch_frames[vid_id]  # just as selected
 
             batch_x.append(
-               cv2.imread(os.path.join(self.data_root_path, "v_" + batch_video_names[vid_id], 'frame{}'.format(str(frame_id).zfill(6)) + '.jpg'),0)
+                cv2.cvtColor(cv2.imread(os.path.join(self.data_root_path, "v_" + batch_video_names[vid_id], 'frame{}'.format(str(frame_id).zfill(6)) + '.jpg')), cv2.COLOR_BGR2RGB)
             )
 
         if self.is_training:
