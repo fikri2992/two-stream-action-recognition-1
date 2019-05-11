@@ -92,7 +92,7 @@ else:
 
     # noinspection PyUnboundLocalVariable
     keras_spatial_model = model.get_keras_model()
-
+    tensorboard = TensorBoard(log_dir="./logs/{}".format(time()))
     # init data loader
     train_loader, test_loader, test_video_level_label = data_loader(**model.get_loader_configs()).run()  # batch_size, width , height)
 
@@ -108,6 +108,6 @@ else:
                                       epochs=epochs,
                                       use_multiprocessing=True, workers=workers,
                                       # validation_data=gen_test(), validation_steps=len(test_loader.dataset)
-                                      callbacks=[SpatialValidationCallback(model=keras_spatial_model, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
+                                      callbacks=[tensorboard,SpatialValidationCallback(model=keras_spatial_model, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
                                                  keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience=validate_every, verbose=1)],
                                       )
