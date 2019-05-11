@@ -19,15 +19,15 @@ this includes: pretrained and from scratch resnet/xception/vgg19/mobile net hype
 # augmenter_level = 1  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,sgd,pretrained,5e-5,resnet  """
-is_adam = False
+is_adam = True
 pretrained = True
 testing_samples_per_video = 19
 lr = 5e-5
 model_name = "resnet"  # resnet xception vgg mobilenet
-epochs = 2
+epochs = 350
 validate_every = 5
 stacked_frames = 10
-augmenter_level = 1  # 0 heavy , 1 medium,2 simple
+augmenter_level = 2  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,adam,scratch,5e-5,resnet  """
 # is_adam = True
