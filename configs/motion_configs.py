@@ -27,7 +27,7 @@ model_name = "resnet"  # resnet xception vgg mobilenet
 epochs = 10
 validate_every = 5
 stacked_frames = 10
-augmenter_level = 2  # 0 heavy , 1 medium,2 simple
+augmenter_level = 1  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,adam,scratch,5e-5,resnet  """
 # is_adam = True
