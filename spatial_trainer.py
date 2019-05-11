@@ -34,7 +34,7 @@ suffix = ""  # put your name or anything(your crush :3) :D
 experiment_identifier = suffix + ("" if suffix == "" else "-") + get_augmenter_text(augmenter_level) + "-spa-" + model_name + "-" + ("adam" if is_adam else "SGD") + "-" + str(lr) + "-" + ("imnet" if pretrained else "scrat")
 log_file = "spatial.log"
 log_stream = open("spatial.log", "a")
-training_log = open("training.log", "a")
+training_log = open("spatial_training.log", "a")
 h5py_file = "spatial.h5"
 pred_file = "spatial.preds"
 ################################################################################

@@ -35,6 +35,7 @@ suffix = "hater"  # put your name or anything(your crush :3) :D
 experiment_identifier = suffix + ("" if suffix == "" else "-") + get_augmenter_text(augmenter_level) + "-mot-" + model_name + "-" + ("adam" if is_adam else "SGD") + "-" + str(lr) + "-" + ("imnet" if pretrained else "scrat")
 log_file = "motion.log"
 log_stream = open("motion.log", "a")
+training_log = open("motion_training.log", "a")
 h5py_file = "motion.h5"
 pred_file = "motion.preds"
 ################################################################################
@@ -47,6 +48,7 @@ checkpoint_found, zip_file_name = drive_manager.get_latest_snapshot()
 # you need to send it as callback before keras reduce on plateau
 MotionValidationCallback = partial(eval_globals.get_validation_callback,
                                    log_stream=log_stream,
+                                   training_log=training_log,
                                    validate_every=validate_every,
                                    testing_samples_per_video=testing_samples_per_video,
                                    pred_file=pred_file, h5py_file=h5py_file, drive_manager=drive_manager, log_file=log_file)

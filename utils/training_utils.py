@@ -28,7 +28,7 @@ def get_validation_callback(log_stream,training_log, validate_every, model, test
             global last_video_level_loss
             epoch_one_based = epoch + 1
             log("Epoch", epoch_one_based, file=log_stream)
-            log("", epoch_one_based,",",logs["acc_top_1"],",",logs["acc_top_5"],",",logs["loss"], file=training_log)
+            log("", epoch_one_based, "," , logs["acc_top_1"], "," , logs["acc_top_5"], "," , logs["loss"], file=training_log)
             if epoch_one_based % validate_every == 0 and epoch_one_based > 0:
                 video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(model=model,
                                                                                                                       test_loader=test_loader,
