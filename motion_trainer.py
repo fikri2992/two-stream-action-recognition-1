@@ -54,7 +54,7 @@ MotionValidationCallback = partial(eval_globals.get_validation_callback,
 data_loader = partial(frame_dataloader.MotionDataLoader,
                       testing_samples_per_video=testing_samples_per_video,
                       augmenter_level=augmenter_level,
-                      stacked_frames=stacked_frames)
+                      log_stream=log_stream, stacked_frames=stacked_frames)
 
 if checkpoint_found:
     # restore the model from the checkpoint
@@ -104,6 +104,7 @@ else:
                                loss=sparse_categorical_cross_entropy_loss,
                                metrics=[acc_top_1, acc_top_5])
 
+    keras_motion_model.summary(print_fn=lambda *args: print(args, file=log_stream))
     keras_motion_model.summary()
     log_stream.flush()
     # training
