@@ -18,7 +18,7 @@ note: folders are identified on my drive with their experiment_identifier
 note: validation is done by MotionValidationCallback which validates on the given dataset evaluation section
 """
 from functools import partial
-
+from time import time
 import frame_dataloader
 import utils.training_utils as eval_globals
 from configs.motion_configs import *
