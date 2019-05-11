@@ -27,7 +27,7 @@ from evaluation.evaluation import *
 from models.motion_models import *
 from utils import log, get_augmenter_text
 from utils.drive_manager import DriveManager
-
+from keras.callbacks import TensorBoard
 ################################################################################
 """Files, paths & identifier"""
 suffix = "hater"  # put your name or anything(your crush :3) :D
@@ -68,14 +68,14 @@ if checkpoint_found:
                                                                     height=int(motion_model_restored.inputs[0].shape[2]),
                                                                     batch_size=get_batch_size(motion_model_restored,
                                                                                               spatial=False)).run()
-
+    tensorboard = TensorBoard(log_dir="./logs/{}".format(time()))
     # training
     motion_model_restored.fit_generator(train_loader,
                                         steps_per_epoch=len(train_loader),  # generates a batch per step
                                         epochs=epochs,
                                         use_multiprocessing=True, workers=workers,
                                         # validation_data=gen_test(), validation_steps=len(test_loader.dataset)
-                                        callbacks=[MotionValidationCallback(model=motion_model_restored, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
+                                        callbacks=[tensorboard , MotionValidationCallback(model=motion_model_restored, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
                                                    keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience=validate_every, verbose=1)],
                                         initial_epoch=int(zip_file_name.split("-")[0]))  # get epoch number
 
@@ -107,13 +107,13 @@ else:
     keras_motion_model.summary(print_fn=lambda *args: print(args, file=log_stream))
     keras_motion_model.summary()
     log_stream.flush()
-
+    tensorboard = TensorBoard(log_dir="./logs/{}".format(time()))
     # training
     keras_motion_model.fit_generator(train_loader,
                                      steps_per_epoch=len(train_loader),  # generates a batch per step
                                      epochs=epochs,
                                      use_multiprocessing=True, workers=workers,
                                      # validation_data=gen_test(), validation_steps=len(test_loader.dataset)
-                                     callbacks=[MotionValidationCallback(model=keras_motion_model, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
+                                     callbacks=[tensorboard , MotionValidationCallback(model=keras_motion_model, test_loader=test_loader, test_video_level_label=test_video_level_label),  # returns callback instance
                                                 keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience=validate_every * 10, verbose=1)],
                                      )
