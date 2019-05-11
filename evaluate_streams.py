@@ -23,8 +23,10 @@ spatial_model_restored.summary()
 
 # evaluate
 _, spatial_test_loader, test_video_level_label = frame_dataloader.SpatialDataLoader(
-
-    width=int(spatial_model_restored.inputs[0].shape[1]), height=int(spatial_model_restored.inputs[0].shape[2]), batch_size=get_batch_size(spatial_model_restored, spatial=True), testing_samples_per_video=19
+    width=int(spatial_model_restored.inputs[0].shape[1]), 
+    height=int(spatial_model_restored.inputs[0].shape[2]), 
+    batch_size=get_batch_size(spatial_model_restored, spatial=True), 
+    testing_samples_per_video=19
 ).run()
 
 video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(spatial_model_restored, spatial_test_loader, test_video_level_label, 19)
