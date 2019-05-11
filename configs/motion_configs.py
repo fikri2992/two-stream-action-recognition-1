@@ -25,7 +25,7 @@ testing_samples_per_video = 19
 lr = 5e-5
 model_name = "resnet"  # resnet xception vgg mobilenet
 epochs = 10
-validate_every = 1
+validate_every = 5
 stacked_frames = 10
 augmenter_level = 2  # 0 heavy , 1 medium,2 simple
 ###############################################################################

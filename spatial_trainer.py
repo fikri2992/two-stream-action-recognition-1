@@ -19,7 +19,6 @@ note: validation is done by spatialValidationCallback which validates on the giv
 """
 from functools import partial
 from time import time
-from keras.callbacks import TensorBoard
 import frame_dataloader
 import utils.training_utils as eval_globals
 from configs.spatial_configs import *
@@ -48,7 +47,7 @@ checkpoint_found, zip_file_name = drive_manager.get_latest_snapshot()
 # you need to send it as callback before keras reduce on plateau
 SpatialValidationCallback = partial(eval_globals.get_validation_callback,
                                     log_stream=log_stream,
-                                    validate_every=validate_every,
+                                    validate_every=1,
                                     testing_samples_per_video=testing_samples_per_video,
                                     pred_file=pred_file, h5py_file=h5py_file, drive_manager=drive_manager, log_file=log_file)
 
@@ -98,7 +97,6 @@ else:
 
     keras_spatial_model.compile(optimizer=keras.optimizers.Adam(lr=lr) if is_adam else keras.optimizers.SGD(lr=lr, momentum=0.9), loss=sparse_categorical_cross_entropy_loss, metrics=[acc_top_1, acc_top_5])
 
-    keras_spatial_model.summary(print_fn=lambda *args: print(args, file=log_stream))
     keras_spatial_model.summary()
     log_stream.flush()
 
