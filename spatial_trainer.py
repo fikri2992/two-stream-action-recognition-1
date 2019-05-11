@@ -18,7 +18,8 @@ note: folders are identified on my drive with their experiment_identifier
 note: validation is done by spatialValidationCallback which validates on the given dataset evaluation section
 """
 from functools import partial
-
+from time import time
+from keras.callbacks import TensorBoard
 import frame_dataloader
 import utils.training_utils as eval_globals
 from configs.spatial_configs import *
@@ -39,7 +40,7 @@ pred_file = "spatial.preds"
 ################################################################################
 """Checking latest"""
 print(experiment_identifier)
-num_actions = 2
+num_actions = 10
 print("Number of workers:", workers, file=log_stream)
 drive_manager = DriveManager(experiment_identifier)
 checkpoint_found, zip_file_name = drive_manager.get_latest_snapshot()

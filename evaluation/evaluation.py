@@ -18,7 +18,7 @@ import tqdm
 from tensorflow import keras
 
 """ Global variables for evaluation """
-num_actions = 2
+num_actions = 10
 workers = min(multiprocessing.cpu_count(), 4)
 is_tesla_k80 = os.path.isdir("/content")  # this is true if you are on colab :D
 

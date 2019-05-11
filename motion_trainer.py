@@ -19,6 +19,7 @@ note: validation is done by MotionValidationCallback which validates on the give
 """
 from functools import partial
 from time import time
+from keras.callbacks import TensorBoard
 import frame_dataloader
 import utils.training_utils as eval_globals
 from configs.motion_configs import *
@@ -27,7 +28,7 @@ from evaluation.evaluation import *
 from models.motion_models import *
 from utils import log, get_augmenter_text
 from utils.drive_manager import DriveManager
-from keras.callbacks import TensorBoard
+
 ################################################################################
 """Files, paths & identifier"""
 suffix = "hater"  # put your name or anything(your crush :3) :D
@@ -39,7 +40,7 @@ pred_file = "motion.preds"
 ################################################################################
 """Checking latest"""
 print(experiment_identifier)
-num_actions = 2
+num_actions = 10
 print("Number of workers:", workers, file=log_stream)
 drive_manager = DriveManager(experiment_identifier)
 checkpoint_found, zip_file_name = drive_manager.get_latest_snapshot()
