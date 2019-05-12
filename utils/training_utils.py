@@ -29,17 +29,13 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
             epoch_one_based = epoch + 1
             log("Epoch", epoch_one_based, file=log_stream)
             log("", epoch_one_based, "," , logs["acc_top_1"], "," , logs["acc_top_5"], "," , logs["loss"], file=training_log)
-            video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(model=model,
-                                                                                                                      test_loader=test_loader,
-                                                                                                                      test_video_level_label=test_video_level_label,
-                                                                                                                      testing_samples_per_video=testing_samples_per_video)
             log("", epoch_one_based, "," , video_level_accuracy_1, "," , video_level_accuracy_5, "," , video_level_loss, file=validation_log)
 
-            if epoch_one_based % validate_every == 0 and epoch_one_based > 0:
-                # video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(model=model,
-                #                                                                                                       test_loader=test_loader,
-                #                                                                                                       test_video_level_label=test_video_level_label,
-                #                                                                                                       testing_samples_per_video=testing_samples_per_video)  # 3783*(testing_samples_per_video=19)= 71877 frames of videos
+            if  epoch_one_based > 0:
+                video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(model=model,
+                                                                                                                      test_loader=test_loader,
+                                                                                                                      test_video_level_label=test_video_level_label,
+                                                                                                                      testing_samples_per_video=testing_samples_per_video)  # 3783*(testing_samples_per_video=19)= 71877 frames of videos
                 if video_level_accuracy_1 > best_video_level_accuracy_1:
                     log("Epoch", epoch_one_based, "Established new baseline:", video_level_accuracy_1, file=log_stream)
                     best_video_level_accuracy_1 = video_level_accuracy_1
@@ -57,14 +53,14 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
                 logs['val_loss'] = video_level_loss
 
                 log_stream.flush()
-                with open(pred_file, 'wb') as f:
-                    pickle.dump((dict(test_video_level_preds), testing_samples_per_video), f)
-                model.save(h5py_file)
-
-                drive_manager.upload_project_files(
-                    files_list=[log_file, pred_file, h5py_file],
-                    snapshot_name=str(epoch_one_based) + "-" + "{0:.5f}".format(best_video_level_accuracy_1) + "-" + "{0:.5f}".format(video_level_accuracy_1))
-
+                
+                if epoch_one_based % validate_every == 0 and epoch_one_based > 0:
+                    drive_manager.upload_project_files(
+                        files_list=[log_file, pred_file, h5py_file],
+                        snapshot_name=str(epoch_one_based) + "-" + "{0:.5f}".format(best_video_level_accuracy_1) + "-" + "{0:.5f}".format(video_level_accuracy_1))
+                    with open(pred_file, 'wb') as f:
+                        pickle.dump((dict(test_video_level_preds), testing_samples_per_video), f)
+                    model.save(h5py_file)
             else:
                 logs['val_loss'] = last_video_level_loss
             log_stream.flush()
