@@ -60,7 +60,7 @@ model_name = "xception"  # resnet xception vgg mobilenet
 epochs = 100
 validate_every = 5
 stacked_frames = 10
-augmenter_level = 1  # 0 heavy , 1 medium,2 simple
+augmenter_level = 0  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,adam,pretrained,5e-6,xception"""
 # is_adam = True

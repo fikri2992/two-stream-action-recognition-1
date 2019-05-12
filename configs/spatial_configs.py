@@ -15,7 +15,7 @@ lr = 5e-5
 model_name = "resnet"  # resnet xception vgg mobilenet
 epochs = 100
 validate_every = 5
-augmenter_level = 1  # 0 heavy , 1 medium,2 simple
+augmenter_level = 0  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,sgd,pretrained,5e-5,resnet  78.5 ~ 80"""
 # is_adam = False
