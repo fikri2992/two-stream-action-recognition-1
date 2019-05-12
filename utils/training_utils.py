@@ -26,6 +26,10 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
             """
             global best_video_level_accuracy_1
             global last_video_level_loss
+            global video_level_loss
+            global video_level_accuracy_1
+            global video_level_accuracy_5
+            global test_video_level_preds
             epoch_one_based = epoch + 1
             log("Epoch", epoch_one_based, file=log_stream)
             log("", epoch_one_based, "," , logs["acc_top_1"], "," , logs["acc_top_5"], "," , logs["loss"], file=training_log)
