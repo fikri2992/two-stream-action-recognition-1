@@ -34,7 +34,6 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
 
             
             log("Epoch", epoch_one_based, file=log_stream)
-            log(logs)
             log("", epoch_one_based, "," , logs["acc_top_1"], "," , logs["acc_top_5"], "," , logs["loss"], file=training_log)
             # log("", epoch_one_based, "," , logs["val_acc_top_1"], "," , logs["val_acc_top_5"], "," , logs["val_loss"], file=validation_log)
             if epoch_one_based > 0:
