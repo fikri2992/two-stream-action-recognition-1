@@ -70,6 +70,10 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
            
 
             if epoch_one_based > 0:
+                video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(model=model,
+                                                                                                                      test_loader=test_loader,
+                                                                                                                      test_video_level_label=test_video_level_label,
+                                                                                                                      testing_samples_per_video=testing_samples_per_video)
                 log("", epoch_one_based, "," , video_level_accuracy_1, "," , video_level_accuracy_5, "," , video_level_loss, file=validation_log)
             
             log_stream.flush()
