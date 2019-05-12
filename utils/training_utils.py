@@ -34,7 +34,6 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
 
             
             log("Epoch", epoch_one_based, file=log_stream)
-            log("", epoch_one_based, "," , logs["acc_top_1"], "," , logs["acc_top_5"], "," , logs["loss"], file=training_log)
             # log("", epoch_one_based, "," , logs["val_acc_top_1"], "," , logs["val_acc_top_5"], "," , logs["val_loss"], file=validation_log)
             # if epoch_one_based > 0:
             #     video_level_loss, video_level_accuracy_1, video_level_accuracy_5, test_video_level_preds = eval_model(model=model,
@@ -58,6 +57,7 @@ def get_validation_callback(log_stream,training_log,validation_log, validate_eve
                     log("Epoch", epoch_one_based, "Baseline:", best_video_level_accuracy_1, "but got:", video_level_accuracy_1, file=log_stream)
 
                 last_video_level_loss = video_level_loss
+                log("", epoch_one_based, "," , logs["acc_top_1"], "," , logs["acc_top_5"], "," , logs["loss"], file=training_log)
                 log("", epoch_one_based, "," , video_level_accuracy_1, "," , video_level_accuracy_5, "," , video_level_loss, file=validation_log)
                 log("=" * 100 + "\n(Training:)Epoch", epoch_one_based, "prec@1", logs["acc_top_1"], "prec@5", logs["acc_top_5"], "loss", logs["loss"], file=log_stream)
                 log("(Validation:)Epoch", epoch_one_based, "prec@1", video_level_accuracy_1, "prec@5", video_level_accuracy_5, "loss", video_level_loss, file=log_stream)
