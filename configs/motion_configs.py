@@ -52,11 +52,11 @@ this includes: pretrained and from scratch resnet/xception/vgg19/mobile net hype
 # augmenter_level = 1  # 0 heavy , 1 medium,2 simple
 ###############################################################################
 """ medium,adam,pretrained,5e-5,xception """
-is_adam = False
+is_adam = True
 pretrained = True
 testing_samples_per_video = 19
 lr = 5e-5
-model_name = "xception"  # resnet xception vgg mobilenet
+model_name = "vgg"  # resnet xception vgg mobilenet
 epochs = 100
 validate_every = 5
 stacked_frames = 10
