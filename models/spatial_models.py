@@ -123,11 +123,13 @@ class VGGSpatialCNN:
 
         # create the base pre-trained model
         self.vgg19_no_top = VGG19(weights='imagenet' if pre_trained else None, include_top=False)
-
+        # menambahkan dense 3 dan dense 4
         self.flat = Flatten(name='flatten')
         self.Dense_1 = Dense(4096, activation='relu', name='fc1')
         self.Dense_2 = Dense(4096, activation='relu', name='fc2')
-        self.Dense_3 = Dense(num_classes, activation='softmax', name='predictions')
+        self.Dense_3 = Dense(4096, activation='relu', name='fc3')
+        self.Dense_4 = Dense(4096, activation='relu', name='fc5')
+        self.Dense_5 = Dense(num_classes, activation='softmax', name='predictions')
 
     def get_keras_model(self):
         # print(inputs)
